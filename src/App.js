@@ -1,7 +1,8 @@
+import React, { useState } from 'react';
 import Expenses from './components/Expenses/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
 
-const expenses = [
+const DUMMY_EXPENSES = [
     {
         id: 'e1',
         title: 'Toilet Paper',
@@ -28,9 +29,16 @@ const expenses = [
 ];
 
 function App() {
+    const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+
+    const newExpenseData = (updatedExpenses) => {
+        setExpenses(updatedExpenses);
+    };
+
     const saveNewExpense = (newExpenses) => {
-        console.log('app.js');
-        console.log(newExpenses);
+        setExpenses((prevExpenses) => {
+            return [newExpenses, ...prevExpenses];
+        });
     };
 
     return (
@@ -38,6 +46,7 @@ function App() {
             <NewExpense onAddExpense={saveNewExpense} />
             <Expenses
                 expensesData={expenses}
+                expensesFilterHandler={newExpenseData}
             />
         </div>
     );
