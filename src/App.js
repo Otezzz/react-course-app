@@ -31,10 +31,6 @@ const DUMMY_EXPENSES = [
 function App() {
     const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
 
-    const newExpenseData = (updatedExpenses) => {
-        setExpenses(updatedExpenses);
-    };
-
     const saveNewExpense = (newExpenses) => {
         setExpenses((prevExpenses) => {
             return [newExpenses, ...prevExpenses];
@@ -46,7 +42,6 @@ function App() {
             <NewExpense onAddExpense={saveNewExpense} />
             <Expenses
                 expensesData={expenses}
-                expensesFilterHandler={newExpenseData}
             />
         </div>
     );
