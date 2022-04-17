@@ -5,12 +5,15 @@ import CourseInput from './components/CourseGoals/CourseInput/CourseInput';
 import './App.css';
 
 const App = () => {
-    const [goal, setGoal] = useState('goal');
+    const [goals, setGoals] = useState([
+        'Start text!',
+        'Start text2'
+    ]);
     console.log();
 
     const goalHandler = (goalData) => {
         debugger;
-        setGoal(goalData);
+        setGoals(goalData);
     };
 
     return (
@@ -19,7 +22,7 @@ const App = () => {
                 <CourseInput compText={goalHandler}/>
             </section>
             <section id="goals">
-                <CourseGoalList userCompiled={goal}/>
+                <CourseGoalList userCompiled={goals}/>
             </section>
         </div>
     );

@@ -5,9 +5,13 @@ import './CourseGoalItem.css';
 const CourseGoalItem = props => {
 
     return (
-        <li className="goal-item">
-            {props.userCompiled}
-        </li>
+        props.userCompiled.map((goal)=>{
+            return (
+                <li className="goal-item">
+                    {goal}
+                </li>
+            );
+        })
     );
 };
 
