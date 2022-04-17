@@ -6,7 +6,7 @@ const CourseGoalItem = props => {
 
     return (
         <li className="goal-item">
-            {props.children}
+            {props.text}
         </li>
     );
 };

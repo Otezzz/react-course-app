@@ -15,16 +15,17 @@ const CourseInput = props => {
         const compiledText = userName + `${' (' + age + ' years old)'}`;
 
         props.compText(compiledText);
+        setEnteredText('');
     };
 
     return (
         <form onSubmit={formSubmitHandler}>
             <div className={`${styles['form-control']}`}>
                 <label>Username</label>
-                <input type="text" id="username"/>
+                <input value={enteredText} type="text" id="username"/>
                 <br/>
                 <label>Age (Years)</label>
-                <input type="number" id="age"/>
+                <input value={enteredText} type="number" id="age"/>
             </div>
             <Button type="submit">Add User</Button>
         </form>
