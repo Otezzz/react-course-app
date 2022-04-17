@@ -13,11 +13,10 @@ const App = () => {
 
     const goalHandler = goalData => {
         debugger;
-        setGoals(goalData);
 
-        setCourseGoals(prevGoals => {
+        setGoals(prevGoals => {
             const updatedGoals = [...prevGoals];
-            updatedGoals.unshift({ text: enteredText, id: Math.random().toString() });
+            updatedGoals.unshift({ text: goalData, id: Math.random().toString() });
             return updatedGoals;
         });
     };
