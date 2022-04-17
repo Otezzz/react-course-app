@@ -1,36 +1,32 @@
 import React, {useState} from 'react';
-import styled from 'styled-components';
 
 import Button from '../../UI/Button/Button';
 import styles from './CourseInput.module.css';
 
 const CourseInput = props => {
-    const [enteredValue, setEnteredValue] = useState('');
-    const [isValid, setIsValid] = useState(true);
-
-    const goalInputChangeHandler = event => {
-        setEnteredValue(event.target.value);
-        if (event.target.value.trim().length > 0) {
-            setIsValid(true);
-        }
-    };
+    const [enteredText, setEnteredText] = useState('');
 
     const formSubmitHandler = event => {
         event.preventDefault();
-        if (enteredValue.trim().length === 0) {
-            setIsValid(false);
-            return;
-        }
-        props.onAddGoal(enteredValue);
+
+        debugger;
+        const userName = event.target.elements['username'].value;
+        const age =event.target.elements['age'].value;
+        const compiledText = userName + `${' (' + age + ' years old)'}`;
+
+        props.compText(compiledText);
     };
 
     return (
         <form onSubmit={formSubmitHandler}>
-            <div className={`${styles['form-control']} ${!isValid && styles.invalid}`}>
-                <label>Course Goal</label>
-                <input type="text" onChange={goalInputChangeHandler}/>
+            <div className={`${styles['form-control']}`}>
+                <label>Username</label>
+                <input type="text" id="username"/>
+                <br/>
+                <label>Age (Years)</label>
+                <input type="number" id="age"/>
             </div>
-            <Button type="submit">Add Goal</Button>
+            <Button type="submit">Add User</Button>
         </form>
     );
 };
