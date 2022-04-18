@@ -7,7 +7,8 @@ import styles from './CourseInput.module.css';
 const CourseInput = props => {
     const [userText, setUserText] = useState('');
     const [ageText, setAgeText] = useState('');
-    const [useModal, setUseModal] = useState('false');
+    const [useModal, setUseModal] = useState(false);
+    const [error, setError] = useState();
 
     const userHandler = (event) => {
         setUserText(event.target.value);
@@ -25,13 +26,27 @@ const CourseInput = props => {
         const age =event.target.elements['age'].value;
         const compiledText = userName + `${' (' + age + ' years old)'}`;
 
-        if (userName === undefined) {
+        if (userName === '') {
+            setError('Please enter valid name & age. (non-empty values)');
+        } else if (age === '') {
+            setError('Please enter a valid age (>0)');
+        }
+
+        if (userName === '' || age === '') {
             setUseModal(true);
+            setUserText('');
+            setAgeText('');
+
+            return;
         }
 
         props.compText(compiledText);
         setUserText('');
         setAgeText('');
+    };
+
+    const cancelModalHandler = (data) => {
+        setUseModal(data);
     };
 
     return (
@@ -44,7 +59,7 @@ const CourseInput = props => {
                 <input value={ageText} type="number" id="age" onChange={ageHandler}/>
             </div>
             <Button type="submit">Add User</Button>
-            <ErrorModal modalHandler={useModal}/>
+            {useModal && <ErrorModal errorText={error} onCancelModal={cancelModalHandler}/>}
         </form>
     );
 };
